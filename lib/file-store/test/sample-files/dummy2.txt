@@ -1,0 +1,4 @@
+# Dummy Text File Two #
+
+Just some extra text to fill space and make the file size different from
+dummy1's.

@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /articles/create
+Disallow: /articles/edit/
+Disallow: /articles/delete/
+Disallow: /articles/_partials/
+Disallow: /articles/_ngtpl/
+Disallow: /articles/_api/

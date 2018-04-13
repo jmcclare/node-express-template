@@ -1,0 +1,34 @@
+{
+  "name": "mongoose-file-field",
+  "description": "Mongoose.js plugin for attaching a file to a model instance.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan McClare",
+    "url": "http://jmcclare.com"
+  },
+  "keywords": [
+    "mongoose",
+    "mongodb",
+    "upload",
+    "attachment",
+    "file"
+  ],
+  "homepage": "https://github.com/jmcclare/web-templates/tree/master/node-express/lib/mongoose-file-field",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcclare/web-templates"
+  },
+  "main": "index.coffee",
+  "dependencies": {
+    "async":    "0.9.0",
+    "debug":    "2.1.3"
+  },
+  "localDependencies": {
+    "file-store": "*",
+    "tools": "*"
+  },
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": ">=0.10.25"
+  }
+}

@@ -1,0 +1,374 @@
+extend layout
+block body
+
+  main
+    div.outer.row#main-heading
+      .twelve.columns
+        .panel
+          h1 #{title}
+          strong.subheading A sample template for a Node.js Express site
+
+
+    div.outer.row
+      div.columns
+        p .
+          This sample template for a Node.js Express site is based on the <a
+          href="http://foundation.zurb.com/">Foundation</a> framework's sample
+          template from Foundation version 3.0.6 released on July 20, 2012.
+
+    section.outer.row .
+      <div class="twelve columns">
+        <a name="nav-bar"></a>
+        <h1>Nav Bar</h1>
+        <p>The default top nav bar for Foundation includes the main nav options as well as hover dropdowns that support either a list of anchors or arbitrary content (even Grid content).</p>
+      </div>
+      <div class="twelve columns">
+        <ul class="nav-bar">
+          <li class="active"><a href="#">Nav Item 1</a></li>
+          <li class="has-flyout">
+            <a href="#">Nav Item 2</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <ul class="flyout">
+              <li>
+                <form action="#" method="post">
+                  <fieldset class="textbox">
+                    <label>
+                      <span>Username or email</span>
+                      <input type="text" name="username" autocomplete="on">
+                    </label>
+                    <label>
+                      <span>Password</span>
+                      <input class="js-password-field" type="password" value="" name="password">
+                    </label>
+                    <label>
+                      <input type="checkbox" value="1" name="remember_me">
+                      <span>Remember me</span>
+                    </label>
+                    <button type="submit" class="nice button" style="margin-bottom: 10px;">Sign in</button>
+                  </fieldset>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li class="has-flyout">
+            <a href="#">Nav Item 3</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <div class="flyout">
+              <h5>Regular Dropdown</h5>
+              <div class="row">
+                <div class="six columns">
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                </div>
+                <div class="six columns">
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="has-flyout">
+            <a href="#">Nav Item 4</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <div class="flyout large right">
+              <h5>Large Dropdown</h5>
+              <div class="row">
+                <div class="four columns">
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                </div>
+                <div class="four columns">
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                  <p>This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text. This is example text.</p>
+                </div>
+                <div class="four columns">
+                  <img src="http://placehold.it/200x250" />
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+    div.outer.row
+      div.eight.columns
+
+        section
+          h1 The Grid
+
+          // Grid Example
+          div.row
+            div.twelve.columns
+              div.panel
+                p .
+                  This is a twelve column section in a row. Each of these includes
+                  a div.panel element so you can see where the columns are - it's
+                  not required at all for the grid.
+          div.row
+            div.six.columns
+              div.panel
+                p Six columns
+            div.six.columns
+              div.panel
+                p Six columns
+          div.row
+            div.four.columns
+              div.panel
+                p Four columns
+            div.four.columns
+              div.panel
+                p Four columns
+            div.four.columns
+              div.panel
+                p Four columns
+
+        section
+          h1 Sample Typography and Markup
+
+          p Some values pulled from variables:
+          ul
+            li req.path is 
+              code #{req.path}
+            li app.locals.settings.port is 
+              code #{settings.port}
+          p
+            | Output of path_to.root(): 
+            //-code
+              //-!= path_to.root()
+
+          p
+            | Output of path_to.contact(): 
+            //-code
+              //-!= path_to.contact()
+
+          p
+            | Output of pathTo.contact(): 
+            //-code
+              //-!= pathTo.contact()
+
+          p
+            | Output of pathTo.root(): 
+            //-code
+              //-!= pathTo.root()
+
+          p An ordered list.
+          ol
+            li Item 1
+            li Item 2
+            li Item 3
+            li Item 4
+            li Item 5
+            li Item 6
+            li Item 7
+            li Item 8
+            li Item 9
+            li Item 10
+
+          p .
+            This section is partly to show some major text styles in the output,
+            and partly to show a few edge cases of how to use Jade.
+
+          p
+            | Some text for the p tag. 
+            a(href='/some/page', title='Some Page Title') some link text 
+            | and some more text.  An <a
+            | href="http://www.somereallylongdomainname.com/some/really/long/path/to/a/page",
+            | title="Some Really Long Page Title - And a Site Name">inline</a> HTML
+            | link.
+          pre
+            | Some pre-formatted text
+            | with linebreaks,
+            | and stuff.
+            | A line that is almost certainly too long to fit inside the width of this particular pre element.
+            | Moer text.
+          pre
+            | Some pre-formatted text in a code element
+            | with linebreaks,
+            | and stuff.
+            | No really long lines though.
+            | Moer text.
+          pre.codeblock
+            code
+              | Some pre-formatted text in a code element
+              | with linebreaks,
+              | and stuff.
+              | A line that is almost certainly too long to fit inside the width of this particular pre element.
+              | Moer text.
+          pre.codeblock
+            code
+              | Some pre-formatted text in a code element
+              | with linebreaks,
+              | and stuff.
+              | No really long lines though.
+              | Moer text.
+
+          p
+            | A sample of some text with 
+            q a brief q element
+            |  embedded within it.
+
+          table
+            caption
+              p A caption explaining the table's data.
+            thead
+              tr
+                th column head 1
+                th column head 2
+                th column head 3
+            tfoot
+              tr
+                td column foot 1
+                td column foot 2
+                td column foot 3
+            tbody
+              tr
+                td one one
+                td one two
+                td one three
+              tr
+                td two one
+                td two two
+                td two three
+              tr
+                td three one
+                td three two
+                td three three
+              tr
+                td four one
+                td four two
+                td four three
+
+          article .
+            <p>The entire contents of this article tag are regular HTML (dot
+            notation). This is a three lined paragraph. With the title variable
+            inserted: #{title}.</p>
+
+            <pre>Some multi
+            lined preformatted text.</pre>
+
+            <p>A paragraph with a really long <a
+              href="http://www.somereallylongdomainname.com/some/really/long/path/to/a/page",
+              title="Some Really Long Page Title - And a Site Name">inline</a> HTML
+              link tag.</p>
+
+          p A definition list.
+          dl
+            dt Definition 1
+            dd The text for Definition 1.
+            dt Definition 2
+            dd The text for Definition 2.
+            dt Definition 3
+            dd The text for Definition 3.
+            dt Definition 4
+            dd The text for Definition 4.
+
+          blockquote
+            p .
+              Remembering that I’ll be dead soon is the most important tool I’ve ever
+              encountered to help me make the big choices in life, because almost
+              everything, all external expectations, all pride, all fear of embarrassment
+              or failure, these things just fall away in the face of death, leaving only
+              what is truly important. Remembering that you are going to die is the best
+              way I know to avoid the trap of thinking you have something to lose. You
+              are already naked.  There is no reason not to follow your heart.
+
+            p
+              cite Steve Jobs, Stanford commencement speech, June 2005
+
+        section
+          h1 Buttons
+
+          div.row
+            div.six.columns
+              p
+                a.small.button.radius(href='#') Small Radius Button
+              p
+                a.button(href='#') Medium Button
+              p
+                a.large.button.round(href='#') Large Round Button
+
+            div.six.columns
+              p
+                a.small.alert.button(href='#') Small Alert Button
+              p
+                a.success.button(href='#') Medium Success Button
+              p
+                a.large.secondary.button(href='#') Large Secondary Button
+
+        section
+          h1 Tabs
+
+          dl.tabs
+            dd.active
+              a(href='#simple1') Simple Tab 1
+            dd
+              a(href='#simple2') Simple Tab 2
+            dd
+              a(href='#simple3') Simple Tab 3
+
+          ul.tabs-content
+            li.active#simple1Tab .
+              This is simple tab 1's content. Pretty neat, huh?
+            li#simple2Tab .
+              This is simple tab 2's content. Now you see it!
+            li#simple3Tab .
+              This is simple tab 3's content. It's, you know...okay.
+         
+        section
+          h1 Media-dependent elements
+          p .
+            The elements below change their visibility depending on the current
+            screen type.
+          p.hide-for-touch .
+            This should only display on non touch-enabled devices.
+          p.show-for-touch .
+            This should only display on touch-enabled devices.
+
+        section
+          h1 Foundation Orbit Example
+
+          #orbiter
+            //-div
+              //-img(src='http://dummyimage.com/637x477/dddddd/ffffff.png&text=Image+1', alt='dummy filler image')
+            //-div
+              //-img(src='http://dummyimage.com/637x477/dddddd/ffffff.png&text=Image+2', alt='dummy filler image')
+            .flex-video .
+              <iframe width="420" heig420x315="315" src="http://www.youtube.com/embed/tnHg7bI-gNg" frameborder="0" allowfullscreen></iframe>
+            .flex-video .
+              <iframe width="420" heig420x315="315" src="http://www.youtube.com/embed/tnHg7bI-gNg" frameborder="0" allowfullscreen></iframe>
+            .flex-video .
+              <iframe width="420" heig420x315="315" src="http://www.youtube.com/embed/tnHg7bI-gNg" frameborder="0" allowfullscreen></iframe>
+
+      aside.four.columns
+        h1 Getting Started
+        p .
+          This template includes some basic styles you can modify, play around
+          with, or totally destroy to get going.
+
+        section
+          h1 Other Resources
+          p .
+            For more information on how to use this front-end framework, see
+            the following:
+
+          ul.disc
+            li
+              a(href='http://expressjs.com/') Express
+              br
+              | The Node.js framework this site runs on.
+            li
+              a(href='http://foundation.zurb.com/docs') Foundation Documentation
+              br
+              | The front end framework ground-floor is based on.
+            li .
+              <a href="http://github.com/zurb/foundation">Foundation on Github</a><br />
+              The source files you can dig through to figure out how things work.
+            li .
+              <a href="http://visionmedia.github.com/nib/">Nib</a><br /> The CSS3
+              extensions for Stylus that ground-floor uses. This is similar to
+              Compass for SASS/SCSS.
+            li .
+              <a href="http://learnboost.github.com/stylus/">Stylus</a><br />
+              The elegant CSS preprocessor we are using.
+            li .
+              <a href="https://github.com/visionmedia/jad">Jade</a><br />
+              Main page for the Jade template language.

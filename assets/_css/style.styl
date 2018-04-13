@@ -1,0 +1,37 @@
+//
+// Override settings variables here
+//
+// See ground-floor/settings.styl for other variable names.
+//
+
+// Example variable overrides:
+$baseFontSize ?= 18px
+$importantModNum ?= 60px
+$rowWidth ?= 1000px
+
+
+
+// If you want to override variables using ground-floor functions, you will have
+// to place all of the import statements from ground-floor/index.styl here and
+// place your overrides immediately after `@import "functions"`.
+//
+// A common function to use in overrides is modular-scale(), or ms():
+//
+//    $topBarHeight ?= ms(6)
+
+
+@import "ground-floor"
+@import "jquery-ui"
+@import "jquery-ui-timepicker-addon.css"
+
+
+//
+// Insert project specific styles and overrides here.
+//
+
+#flash
+  .alert-box
+    margin-top ms(1)
+
+#main-heading
+  margin-top ms(1)

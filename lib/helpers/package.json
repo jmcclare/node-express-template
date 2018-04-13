@@ -1,0 +1,10 @@
+{
+  "name": "helpers",
+  "description": "Provides general helper functions for views.",
+  "author": "Jonathan McClare",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "moment":     "2.2.1"
+  }
+}

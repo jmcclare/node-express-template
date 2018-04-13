@@ -1,0 +1,8 @@
+// Grid Calculation for Percentages
+
+gridCalc($colNumber, $totalColumns)
+  if $colNumber and $totalColumns
+    unit((100 * $colNumber / $totalColumns), '%')
+    // Alternate method:
+    //(($colNumber / $totalColumns) * 100)%
+

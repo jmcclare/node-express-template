@@ -1,0 +1,15 @@
+// Font size mixin to include px and rem
+
+font-size($size, $is-important = false)
+  if unit($size) != ''
+    if $is-important
+      font-size $size !important
+    else
+      font-size $size
+  else
+    if $is-important
+      font-size unit($size, 'px') !important
+      font-size unit($size / 10, 'rem') !important
+    else
+      font-size unit($size, 'px')
+      font-size unit($size / 10, 'rem')

@@ -1,0 +1,50 @@
+# Releases #
+
+
+## unreleased ##
+
+### New Features ###
+
+* add footer to staggered styles
+* add Font Awesome icon font
+
+
+## node-express-2.0.0STABLE ##
+
+### New Features ###
+
+* CoffeeScript
+* modular app structure
+* reversible URLs
+* ground-floor Stylus CSS framework
+* CoffeeScript compiled for client side
+* client side CSS and JS consolidation / cache-busting
+* email contact form
+
+
+## node-express-1.1.0STABLE ##
+
+### New Features ###
+
+* custom Stylus with Jade template
+
+
+## node-express-nibbler-1.0.0ALPHA ##
+
+### New Features ###
+
+* cleaned out Twitter Bootstrap
+* custom packages.js
+* Stylus CSS using Nibble
+* jade starting templates based on Nibble
+* updated readme
+
+
+## node-express-1.0.0STABLE ##
+
+### New Features ###
+
+* starting app.js with smaple routes
+* LESS CSS starting template using Twitter Bootstrap
+* common JS setup from Twitter Bootstrap
+* ejs staring HTML templates

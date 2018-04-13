@@ -1,0 +1,45 @@
+extend ../layout
+
+block body
+  //-Passing some variables to the front-end JavaScript
+  script(type='text/javascript')
+    if (typeof articles === 'undefined') {
+      articles = {};
+    }
+    articles.urls = {};
+    articles.urls.index = '#{url("articles.index")}';
+    articles.urls.create = '#{url("articles.create")}';
+    articles.urls.view = '#{urls["articles.view"]}';
+    articles.urls.edit = '#{urls["articles.edit"]}';
+    // A property named 'delete' must be declared as a string because it matches a
+    // reserved keyword and will be interpreted as such in some version's of IE's
+    // JavaScript. The CoffeeScript compiler does this for you.
+    articles.urls['delete']= '#{urls["articles.delete"]}';
+    articles.urls.partials = {};
+    articles.urls.partials.index = '#{url("articles.partials.index")}';
+    articles.urls.partials.view = '#{urls["articles.partials.view"]}';
+    articles.urls.api = {};
+    articles.urls.api.index = '#{url("articles.api.index")}';
+    articles.urls.api.item = '#{urls["articles.api.item"]}';
+    articles.urls.ngtpl = {};
+    articles.urls.ngtpl.index = '#{url("articles.ngtpl.index")}';
+    articles.urls.ngtpl.create = '#{url("articles.ngtpl.create")}';
+    articles.urls.ngtpl.view = '#{url("articles.ngtpl.view")}';
+    articles.urls.ngtpl.edit = '#{url("articles.ngtpl.edit")}';
+    articles.urls.ngtpl['delete'] = '#{url("articles.ngtpl.delete")}';
+    // We are setting the base href to /articles/ to keep the legacy
+    // conversion to hash paths from jumping back to the site root. To
+    // compensate, these routes need URLs under the base. To get those, we
+    // strip the base from the start of the full site paths.
+    articles.basify = function(url) {
+      var re;
+      re = new RegExp('^' + articles.urls.index);
+      return url.replace(re, '');
+    }
+
+  main(ng-view)
+
+    block ng-view
+
+  //-div(ng-app='articles', ng-view)
+    block ng-view

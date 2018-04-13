@@ -1,0 +1,130 @@
+# Image Store #
+
+Image Store provides a class for formatting and storing image files. It stores
+the original image file and any number of formatted versions you define in the
+options.
+
+
+## Installation ##
+
+If you want to reference the package by name without a path make sure this
+directory is in your `NODE_PATH` or in your `node_modules` directory.
+Otherwise, put it wherever is convenient and `require` it using a path.
+
+
+## Basic Use #
+
+    imageStore = require 'image-store'
+
+    options =
+      collection: 'image'
+      formats:
+        embedded:
+          width: 500
+          height: 300
+          fileType: 'JPEG'
+        thumbnail:
+          width: 80
+          height: 50
+          fileType: 'JPEG'
+    imageStore.options (err, options)->
+      return cb err if err
+
+      imageStore.store tempImageFilePath, (err, image)->
+        return cb err if err
+
+        # Store image object in database…
+
+        # Use pubPath to get the full path to the image under the domain that
+        # serves it.
+        pubPath = imageStore.pubPath image
+
+        imageStore.delete image, (err)->
+          return cb err if err
+          # All image files have been deleted. You should remove the image
+          # object from any data stores you have it in.
+
+The returned image object in this case will look like this:
+
+      name: 'some-name.jpg'
+      fileName: 'some-name.jpg'
+      originalFileName: 'Some Name.jpg'
+      collection: 'image'
+      formats:
+        embedded:
+          file: fileObj
+          width: 500
+          height: 300
+          fileType: 'JPEG'
+        thumbnail:
+          file: fileObj
+          width: 80
+          height: 50
+          fileType: 'JPEG'
+
+It will look a copy of the options  used to make it. The `file` parameter of
+each format will be a `file` object returned by `FileStore`.
+
+
+## Options ##
+
+`name` is the readable name of the image. This defaults to the formatted name
+of the image file when left blank. This is a good place to fill in text for the
+`img` tag's `alt` attribute.
+
+`description` is a plain text description of the image. This can be used in a
+caption or in the `img` tag's `title` attribute.
+
+### formats ###
+
+The `formats` object lets you specify different formats to store the images in.
+Here is an example.
+
+    options =
+      formats:
+        embedded:
+          width: 500
+          height: 300
+          fileType: 'JPEG'
+        thumbnail:
+          width: 80
+          height: 50
+          resizeType: 'force'
+          fileType: 'JPEG'
+
+Each format must have a name that is used as its object property. A format that
+is an empty object will store another copy of the original image. This is
+allowed, but it is pointless because the original image will always be stored
+under the `original` format. If you want, you can explicitly add an `original`
+format. This will store a formatted version of the original and the actual
+original file will be discarded. This could be useful if you need to limit
+storage space usage.
+
+TODO: work `resizeType` (or whatever it will be called) out properly and fix it
+here and in the tests.
+
+`width` and `height` are obvious. `resizeType` is what controls exactly what
+they mean.
+
+`fileType` lets you specify the image file format to store it in. Available formats are:
+
+    JPEG
+    PNG
+    GIF
+    BMP
+    PSD
+    XCF
+    TIFF
+    SVG
+
+You should stick to the web formats though. Also, be careful with the `SVG`
+vector format. You will run into problems when you try to resize or convert
+these. I haven't tested it, but I'm pretty sure trying to save a non vector
+format file as `SVG` will cause an error or timeout.
+
+### fileStoreOptions ###
+
+These are options handed to `FileStore` when it is used to store the image
+files. See the `FileStore` docs for more information on these. The only one you
+may want to set here is `collection` so you can separate your image files from
+other types.

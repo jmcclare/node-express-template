@@ -1,0 +1,32 @@
+extend layout
+
+block content
+  - if (canCreate) {
+  a(href="#{url('articles.create')}").small.button Create New Article
+  - }
+
+  each article, slug in articles
+    article
+      - var articleUrl = url('articles.view', { slug: article.slug })
+      - var authorUrl = url('users.view', { username: article.author.username })
+      h1 
+        a(href='#{articleUrl}') #{article.title}
+      p 
+        | Author: 
+        a(href='#{authorUrl}', target='_self') #{article.author.fullName}
+        br
+        | published: 
+        time(datetime='#{(new Date(article.pubTime)).toISOString()}')
+          | #{lDateFmt(article.pubTime)}
+      !{article.compiledSummary}
+      p
+        a(href='#{articleUrl}') Read more…
+
+  div.pagination
+    - if (prevURL) {
+    a(href='#{prevURL}') &lt; newer articles
+    - }
+
+    - if (nextURL) {
+    a(href='#{nextURL}').right older articles &gt;
+    - }

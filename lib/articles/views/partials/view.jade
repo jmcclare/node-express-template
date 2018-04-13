@@ -1,0 +1,26 @@
+extend layout
+
+block content
+  - if (article.editPath) {
+  div.edit-links
+    - var editUrl = url('articles.edit', { slug: article.slug })
+    a(href='#{editUrl}') edit
+    |  
+    - var deleteUrl = url('articles.delete', { slug: article.slug })
+    a(href='#{deleteUrl}') delete
+  - }
+  - var authorUrl = url('users.view', { username: article.author.username })
+  p
+    | Author: 
+    a(href='#{authorUrl}') #{article.author.fullName} 
+    br
+    | created: #{lDateFmt(article.creationTime)}
+    br
+    | published: 
+    time(datetime='#{(new Date(article.pubTime)).toISOString()}')
+      | #{lDateFmt(article.pubTime)}, #{sTimeFmt(article.pubTime)}
+    - if (article.pubTime < article.updateTime) {
+    br
+    | updated: #{sDateFmt(article.updateTime)}, #{sTimeFmt(article.updateTime)}
+    - }
+  !{article.compiledBody}

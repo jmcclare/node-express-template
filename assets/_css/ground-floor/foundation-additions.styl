@@ -1,0 +1,290 @@
+//
+// General Typography
+//
+
+// Use our preferred humanist fonts
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, dl
+  font-family "Open Sans","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif
+
+p, ul, ol, dl, blockquote, pre, table
+  margin modular-scale(0) 0
+
+a.external
+  background url(/_img/ground-floor/external-link-icon-light.png) no-repeat scroll right center transparent
+  padding-right 13px
+
+dt
+  margin modular-scale(0) 0 0 0
+  font-style italic
+dd
+  margin (modular-scale(0) / 2) 0 0 modular-scale(0)
+
+// For some reason, Foundation doesn't set margins for unclassed lists.
+ul, ol
+  margin-left modular-scale(3)
+
+
+pre, code, kbd, samp 
+  font-family monospace, serif
+  font-weight normal
+
+pre 
+  padding 5px
+  overflow-x auto
+  overflow-y hidden
+  line-height 1.4
+
+code, kbd, samp
+  padding 0 3px
+  border 1px solid #EAEAEA
+  border-radius 3px
+  background-color #F8F8F8
+  color #666
+
+.codeblock 
+  padding (modular-scale(0) /2)
+  border-radius 6px
+
+.codeblock, .codeblock code, .codeblock kbd, .codeblock samp 
+  color #aaa
+  background-color #111
+
+.codeblock code, .codeblock kbd, .codeblock samp 
+  padding 0
+  border none
+
+
+//
+// Staggered header sizes for nested sections
+//
+
+h1
+  font-size modular-scale(5)
+// Make it really stand out as a sub-heading of the main h1
+strong.subheading
+  font-size modular-scale(1)
+
+
+// Numbered header sizes
+
+h2
+  font-size modular-scale(4)
+h3
+  font-size modular-scale(3)
+h4
+  font-size modular-scale(2)
+h5
+  font-size modular-scale(1)
+h6
+  font-size modular-scale(0)
+
+
+// Set smaller and smaller sizes for section-nested headers
+// article is left out of the first level of downsizing to allow a single
+// article document to have full sized headers.
+section, footer
+  h1 { font-size: ms(4); }
+  h2 { font-size: ms(3); }
+  h3 { font-size: ms(2); }
+  h4 { font-size: ms(1); }
+  h5 { font-size: ms(0); }
+  section, article, footer
+    h1 { font-size: ms(3); }
+    h2 { font-size: ms(2); }
+    h3 { font-size: ms(1); }
+    h4 { font-size: ms(0); }
+    section, article, footer
+      h1 { font-size: ms(2); }
+      h2 { font-size: ms(1); }
+      h3 { font-size: ms(0); }
+      section, article, footer
+        h1 { font-size: ms(1); }
+        h2 { font-size: ms(0); }
+        section, article, footer
+          h1 { font-size: ms(0); }
+
+
+// Start aside header sizes two scales lower
+
+aside
+  h1
+    font-size modular-scale(3)
+  h2
+    font-size modular-scale(2)
+  h3
+    font-size modular-scale(1)
+  h4
+    font-size modular-scale(0)
+  h5
+  h6
+    font-size modular-scale(0)
+
+section, footer
+  aside
+    h1
+      font-size modular-scale(2)
+    h2
+      font-size modular-scale(1)
+    h3
+      font-size modular-scale(0)
+  section, article, footer
+    aside
+      h1
+        font-size modular-scale(1)
+      h2
+        font-size modular-scale(0)
+    section, article, footer
+      aside
+        h1
+          font-size modular-scale(0)
+
+
+//
+// aside is meant for things like sidebars, navigation, ads and pulled out
+// sections of text.
+// Leave text a little smaller here.
+//
+
+aside
+  p, ul, ol, li,  dl, dt, dd, blockquote, pre, table
+    font-size ms(0) - round(ms(0) / 10)
+
+
+//
+// footer
+//
+
+footer
+  color $footerTxtColor
+  background-color $footerBgColor
+  margin footer-margin 0 0 0
+  padding 0
+  h1, h2, h3, h4, h5, h6
+    color $footerHeaderColor
+  .social-media
+    .icons
+      text-align: center
+      font-size modular-scale(6)
+
+
+//
+// Wrapper classes to make embedded YouTube videos (or any embedded iframe or
+// object) scale with the rest of the layout.
+//
+// These classes work better than Foundation's flex-video class because they
+// will use the aspect ration of the video element when scaling.
+//
+// Code from here: http://webdesignerwall.com/demo/elastic-videos/
+//
+
+.video-container
+  position relative
+  padding-bottom 56.25%
+  padding-top 30px
+  height 0
+  overflow hidden
+
+// Use the video-slide class for orbiter slides that contain an embedded
+// YouTube video.
+.video-container
+.video-slide
+  iframe
+  object
+  embed
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+
+
+/* Non-mobile display targeting */
+// @media only screen and (min-width: $screenSmall)
+//unquote('@media only screen and (min-width: ' + $screenSmall + ') {')
+//p, ul, ol, li,  dl, dt, dd, blockquote, pre, table
+//  font-size (modular-scale(0) + 2)
+//unquote('}')
+
+
+/* Small (mobile) display targeting */
+// @media only screen and (max-width: $screenSmall - 1)
+unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+
+p, ul, ol, li,  dl, dt, dd, blockquote, pre, table
+  font-size ms(0) - round(ms(0) / 10)
+
+
+//
+// Staggered header sizes for nested sections
+//
+
+h1
+  font-size modular-scale(4)
+// Make it really stand out as a sub-heading of the main h1
+header h2
+  font-size modular-scale(0)
+
+// Set smaller and smaller sizes for section-nested headers
+section
+  h1
+    font-size modular-scale(3)
+  section
+    h1
+      font-size modular-scale(2)
+    section
+      h1
+        font-size modular-scale(1)
+      section
+        h1
+          font-size modular-scale(0)
+        section
+          h1
+            font-size modular-scale(0)
+
+
+// Numbered header sizes
+
+h2
+  font-size modular-scale(3)
+h3
+  font-size modular-scale(2)
+h4
+  font-size modular-scale(1)
+h5
+  font-size modular-scale(0)
+h6
+  font-size modular-scale(0)
+
+
+// Start aside header sizes two scales lower
+
+//aside
+//  h1
+//    font-size modular-scale(3)
+//  section
+//    h1
+//      font-size modular-scale(2)
+//    section
+//      h1
+//        font-size modular-scale(1)
+//      section
+//        h1
+//          font-size modular-scale(0)
+//
+//aside
+//  h2
+//    font-size cmodular-scale(2)
+//  h3
+//    font-size cmodular-scale(1)
+//  h4
+//    font-size cmodular-scale(0)
+//  h5
+//  h6
+//    font-size cmodular-scale(0)
+
+footer
+  .social-media
+    .icons
+      font-size modular-scale(5)
+
+unquote('}')

@@ -1,0 +1,74 @@
+extend ../layout
+block body
+
+  main
+    header.outer.row#main-heading
+      .twelve.columns
+        .panel
+          h1 #{title}
+          if subTitle
+            strong.subheading #{subTitle}
+        hr
+
+
+    .outer.row
+      - if (alertMessages) {
+        .twelve.columns
+          .alert-box
+            != alertMessages
+            a.close(href='') ×
+      - }
+
+      - if (errorMessages) {
+        .twelve.columns
+          .alert-box.alert
+            != errorMessages
+            a.close(href='') ×
+      - }
+
+    .outer.row
+      .eight.columns
+        - var formAction = url('contact')
+        form(action="#{formAction}", method="POST")
+          fieldset
+            .row
+              .six.columns
+                - if (fieldErrors['name']) {
+                label(for="name", class="error") Name
+                input(type="text", name="name", value="#{name}", class="error")
+                small.error #{fieldErrors['name']}
+                - } else {
+                label(for="name") Name
+                input(type="text", name="name", value="#{name}")
+                - }
+              .six.columns
+                - if (fieldErrors['email']) {
+                label(for="email", class="error") Email Address
+                input(type="text", name="email", value="#{email}", class="error")
+                small.error #{fieldErrors['email']}
+                - } else {
+                label(for="email") Email Address
+                input(type="text", name="email", value="#{email}")
+                - }
+            .row.hide
+              .twelve.columns
+                label(for="url") URL
+                input(type="text", name="url", value="")
+            .row
+              .twelve.columns
+                - if (fieldErrors['message']) {
+                label(for="message", class="error") Message
+                textarea(name='message', rows='8', class="error") #{message}
+                small.error #{fieldErrors['message']}
+                - } else {
+                label(for="message") Message
+                textarea(name='message', rows='8') #{message}
+                - }
+          p
+            input(type="submit", class="button radius", value="send")
+
+      aside.four.columns
+        h1 Send Us an Email
+        p .
+          Use this form to send us an email. Make sure you include your name and
+          email address.

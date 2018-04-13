@@ -1,0 +1,167 @@
+// Inspired by https://github.com/twigkit/semantic.gs/blob/master/stylesheets/scss/grid.scss
+
+// Outer row mixin for container rows
+
+// This is probably the only format for this mixin that gives us the working
+// output we want. Many slight changes that should have no effect will end up
+// giving us errors or the wrong output.
+outerRow()
+  // We have to redundantly specify these properties as being under the parent here to
+  // make sure the unquote doesn't get printed under it as well.
+  &
+    width: $rowWidth; max-width: 100%; min-width: $screenSmall; margin: 0 auto;
+  // This will do nothing if it is under the '&' (parent specifier).
+  @extend .ph_clearfix;
+  // This is a hack we will use quite often to stuff the screen size variables
+  // into the media queries. With the tweaking above, the unquote contents will be
+  // printed alone on their own line, the properties below will be printed nested
+  // under the parent, then the character liters \} will be printed alone on it's
+  // own line. This will place the properties inside the media query.
+  unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+  { width: auto; min-width: 0; margin-left: 0; margin-right: 0; }
+  \}
+
+// Inner row mixin for nested rows, must be a child of an outer-row element. $behavior can be 'collapse' to get rid of margins
+
+innerRow($behavior = false) {
+    if $behavior == collapse { @extend .ph_row-i-base; margin: 0; @extend .ph_clearfix;
+  } else                     { @extend .ph_row-i-base; margin: 0 (-($columnGutter/2)); @extend .ph_clearfix; }
+}
+
+// Columns mixin, syntax is ($columns, $behavior). Behavior can be 'centered' which centers things or 'collapse' which collapses the gutters. ex @include row(4,[center | collapse])
+
+// This is probably the only format for this mixin that gives us the working
+// output we want. Many slight changes that should have no effect will end up
+// giving us errors or the wrong output.
+//
+// On top of the techniques we used above in outerRow, we figured out the
+// .nonexistantclass hack. Basically, without those two statements nested under
+// some subclass, they will be printed both before and after the nested properties
+// between them (what we want) and inside the original parent specifier (what we
+// don't want). Somehow, placing them under a child specifier disables the first
+// printing. It's a hack, but it doesn't cause an error, so we'll roll with it.
+column($columns = $columns, $behavior = false)
+  if $behavior == center
+    @extend .ph_fl-n;
+    &
+      margin: 0 auto !important;
+    @extend .ph_c-base;
+    &
+      width: gridCalc($columns, $totalColumns);
+    //.somenonexistantclass
+    //  unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    //{ float: left; width: 100%; }
+    //.somenonexistantclass
+    //  \}
+  else if $behavior == collapse
+    @extend .ph_fl-l;
+    @extend .ph_c-base;
+    { padding: 0; width: gridCalc($columns, $totalColumns); }
+    //.somenonexistantclass
+    //  unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    //{ float: left; width: 100%; }
+    //.somenonexistantclass
+    //  \}
+  else 
+    @extend .ph_fl-l;
+    @extend .ph_c-base;
+    { width: gridCalc($columns, $totalColumns); }
+    //@include respondTo(smallScreen) { float: left; width: 100%; } }
+    //.somenonexistantclass
+    //  unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    //{ float: left; width: 100%; }
+    //.somenonexistantclass
+    //  \}
+
+    // The original Foundation mixin repeated this in all three if statement
+    // cases. We factored it out. The commented out versions are just to show that
+    // the .somenonexistantclass specifiers were needed there as well.
+  .somenonexistantclass
+    unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+  { float: left; width: 100%; }
+  .somenonexistantclass
+    \}
+
+// Offset Mixin, include after a column mixin to manipulate its grid offset.
+
+offsetBy($offset = 1)
+  margin-left: gridCalc($offset, $totalColumns); 
+
+// Push/Pull Mixins, include after a column mixin to manipulate stack ordering.
+
+push($push = 1) { left: gridCalc($push, $totalColumns); }
+pull($push = 1) { right: gridCalc($push, $totalColumns); }
+
+// Mobile Row, synctax is @include mobile-row(); (This mixin isn't really necessary, will be deprecated in 4)
+mobileRow() 
+  .somenonexistantclass
+    unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+  { width: auto; min-width: 0; margin-left: 0; margin-right: 0; clearfix(); } 
+  .somenonexistantclass
+    \}
+
+// Mobile Columns, syntax is @include mobile-column(#);
+
+mobileColumn($columns = $columns, $behavior =  false)
+  if $behavior == center
+    .somenonexistantclass
+      unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    { float: none; margin: 0 auto; position: relative; min-height: 1px; padding: 0 ($columnGutter/2); width: gridCalc($columns, $mobileTotalColumns); }
+    .somenonexistantclass
+      \}
+  else if $behavior == collapse
+    .somenonexistantclass
+      unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    { float: left; position: relative; min-height: 1px; padding: 0; width: gridCalc($columns, $mobileTotalColumns); }
+    .somenonexistantclass
+      \}
+  else
+    .somenonexistantclass
+      unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+    { float: left; width: gridCalc($columns, $mobileTotalColumns); padding: 0 ($columnGutter/2); }
+    .somenonexistantclass
+      \}
+
+// Mobile Push/Pull Mixin
+
+mobilePush($push = 1)
+  .somenonexistantclass
+    unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+  { left: gridCalc($push, $mobileTotalColumns); }
+  .somenonexistantclass
+    \}
+mobilePull($push = 1)
+  .somenonexistantclass
+    unquote('@media only screen and (max-width: ' + ($screenSmall - 1) + ') {')
+  { right: gridCalc($push, $mobileTotalColumns); }
+  .somenonexistantclass
+    \}
+
+// Invisible Placeholder Classes for Grid
+// Stylus doesn't have syntax for placeholders, so we prefix them with '.ph_'
+// instead of '%'.
+.ph_fl-l { float: left; }
+.ph_fl-r { float: right; }
+.ph_fl-n { float: none; }
+
+.ph_clearfix {
+  clearfix();
+}
+.ph_clearfix-m {
+  mobileClearfix();
+ }
+
+.ph_row-o {
+  outerRow();
+}
+.ph_row-i-base { width: auto; max-width: none; min-width: 0; }
+.ph_row-i {
+  innerRow();
+}
+
+.ph_c-base { position: relative; min-height: 1px; padding: 0 ($columnGutter/2); }
+
+for $i in 1..$totalColumns
+  .ph_c-{$i} {
+    column($i);
+  }

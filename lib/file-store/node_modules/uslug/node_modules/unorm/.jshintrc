@@ -1,0 +1,16 @@
+{
+  "quotmark": "double",
+  "shadow": "outer",
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "unused": "vars",
+  "boss": true,
+  "eqnull": true,
+  "trailing": true
+}

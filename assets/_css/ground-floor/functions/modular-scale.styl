@@ -1,0 +1,54 @@
+/*
+ * modular-scale - Use attractive ratios to differentiate sizes.
+ *
+ *  The basic way to do this:
+ *    round($baseFontSize * ($ratio ** scale))
+ * 
+ *  We also want to have it land on $importantModNum at scale = 5. This is the
+ *  scale we usually assign to h1. To accomplish that, we need to multiply
+ *  $ratio by a targeted number before the exponent is applied to it. We'll
+ *  call this number $ms_inRatio (modular-scale important number ratio).
+ *
+ * We also want to have it land on $importantModNum at scale = 5. This is the
+ * scale we usually assign to h1. To accomplish that, we need to find a value
+ * for $ratio that makes that happen. We'll call this $ms_inRatio.
+ *
+ *  Here is a rundown of how we find the formula for that number:
+ *
+ *    $baseFontSize * ($ms_inRatio ** 5) = $importantModNum
+ *    $ms_inRatio ** 5 = ($importantModNum / $baseFontSize)
+ *    $ms_inRatio = ($importantModNum / $baseFontSize) ** (1/5)
+ *
+ * Our method is a little different from the standard one. To hit
+ * $importantModNum, the standard method creates a second set of numbers using
+ * that as the base and merges it with the first one. This means
+ * $importantModNum may not necessarily be the fifth number in the sequence.
+ *
+ * See https://github.com/scottkellum/modular-scale for a full implementation
+ * and http://modularscale.com/ for the original demo and explanation.
+ *
+ * Our method changes the ratio to ensure we hit $importantModNum at
+ * scale = 5.
+ */
+modular-scale(scale)
+  //$ms_inRatio = ((($importantModNum / $baseFontSize) ** (1/5)) / $ratio)
+  //round($baseFontSize * (($ms_inRatio * $ratio) ** scale))
+  $ms_inRatio = (($importantModNum / $baseFontSize) ** (1/5))
+  round($baseFontSize * (($ms_inRatio) ** scale))
+
+ms = modular-scale
+
+
+/*
+ * raw-modular-scale
+ *
+ * To get a numbers on a scale using the value of the $ratio setting, use
+ * raw-modular-scale() or rms().
+ *
+ * If you set $importantModNum to the result of rms(5), your numbers from rms()
+ * will be the same as what you'll get from ms().
+ */
+raw-modular-scale(scale)
+  round($baseFontSize * ($ratio ** scale))
+
+rms = raw-modular-scale

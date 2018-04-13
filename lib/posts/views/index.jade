@@ -1,0 +1,201 @@
+extend ../layout
+block body
+
+  main
+    header.outer.row#main-heading
+      .twelve.columns
+        .panel
+          h1 #{title}
+          if subTitle
+            strong.subheading #{subTitle}
+        hr
+
+
+    if (alertMessages || errorMessages)
+      .outer.row
+        if (alertMessages)
+          .twelve.columns
+            .alert-box
+              != alertMessages
+              a.close(href='') ×
+
+        if (errorMessages)
+          .twelve.columns
+            .alert-box.alert
+              != errorMessages
+              a.close(href='') ×
+
+    .outer.row
+      .eight.columns
+        - var formAction = url('posts')
+        form(action="#{formAction}", method="POST", enctype="multipart/form-data").custom
+          fieldset
+            .row
+              .six.columns
+                if (fieldErrors['name'])
+                  label(for="name", class="error") Name
+                  input(type="text", name="name", value="#{name}", class="error")
+                  small.error #{fieldErrors['name']}
+                else
+                  label(for="name") Name
+                  input(type="text", name="name", value="#{name}")
+              .six.columns
+                if (fieldErrors['email'])
+                  label(for="email", class="error") Email Address
+                  input(type="text", name="email", value="#{email}", class="error")
+                  small.error #{fieldErrors['email']}
+                else
+                  label(for="email") Email Address
+                  input(type="text", name="email", value="#{email}")
+            //-.row
+              //-.twelve.columns
+                //-label(for="featureImage") Feature Image
+                //-input(type="file", name="featureImage")
+            .row
+              .six.columns
+                label(for="download1") Download 1
+                input(type="file", name="download1")
+              .six.columns
+                label(for="download2") Download 2
+                input(type="file", name="download2")
+            .row
+              .six.columns
+                label(for="file1") File 1
+                input(type="file", name="file1")
+              .six.columns
+                label(for="file2") File 2
+                input(type="file", name="file2")
+            .row
+              .six.columns
+                label(for="image1") Image 1
+                input(type="file", name="image1")
+              .six.columns
+                label(for="image2") Image 2
+                input(type="file", name="image2")
+            .row.hide
+              .twelve.columns
+                label(for="url") URL
+                input(type="text", name="url", value="")
+            .row
+              .twelve.columns
+                if (fieldErrors['summary'])
+                  label(for="summary", class="error") summary
+                  textarea(name='summary', rows='8', class="error") #{summary}
+                  small.error #{fieldErrors['summary']}
+                else
+                  label(for="summary") summary
+                  textarea(name='summary', rows='8') #{summary}
+            .row
+              .twelve.columns
+                if (fieldErrors['message'])
+                  label(for="message", class="error") Message
+                  textarea(name='message', rows='8', class="error") #{message}
+                  small.error #{fieldErrors['message']}
+                else
+                  label(for="message") Message
+                  textarea(name='message', rows='8') #{message}
+            .row
+              .four.columns
+                | &nbsp;
+              .four.columns
+                label(for="messageFormat").inline.right Message Format
+              .four.columns
+                select(name='messageFormat')
+                  option(selected) markdown
+                  option() jade
+                  option(value="") unformatted
+          p
+            input(type="submit", class="button radius", value="post")
+
+        if (posts)
+          .outer.row
+            section.twelve.columns
+              h1 Posts
+              each post in posts
+                article
+                  h1 #{post.name}
+                  - var formAction = url('posts.delete')
+                  form(action="#{formAction}", method="POST")
+                    input(type="hidden", name='postID', value='#{post._id}')
+                    p
+                      input(type="submit", class="button radius", value="delete post")
+                  if (post.featureImage)
+                    p
+                      | #{post.featureImage.thumb}
+                    //-p
+                      //-img(src='#{post.thumb_img}')
+                  if (post.summary.compiled)
+                    .summary
+                      != post.summary.compiled
+                  if (post.message.compiled)
+                    .message
+                      != post.message.compiled
+                  - var download1 = post.ffurl('download1')
+                  - var download2 = post.ffurl('download2')
+                  if (download1 || download2)
+                    section
+                      h1 Downloads
+                      if download1
+                        p
+                          - var formAction = url('posts.delete')
+                          form(action="#{formAction}", method="POST")
+                            input(type="hidden", name='postID', value='#{post._id}')
+                            input(type="hidden", name='fieldName', value='download1')
+                            | Download 1: 
+                            a(href='#{download1}') #{post.download1.name}
+                            | &nbsp;
+                            input(type="submit", class="button radius small right", value="delete file")
+                      if download2
+                        p
+                          - var formAction = url('posts.delete')
+                          form(action="#{formAction}", method="POST")
+                            input(type="hidden", name='postID', value='#{post._id}')
+                            input(type="hidden", name='fieldName', value='download2')
+                            | Download 2: 
+                            a(href='#{download2}') #{post.download2.name}
+                            | &nbsp;
+                            input(type="submit", class="button radius small right", value="delete file")
+                  if (post.files.length > 0)
+                    section
+                      h1 Attached Files
+                      each file, index in post.files
+                        //- Some indexes may be left null from previously
+                        //- deleted files.
+                        if file
+                          - var name = file.name
+                          p
+                            //-| #{index}: 
+                            //-a(href='#{post.attachedFileURL(index)}') #{originalName}
+                            //-img(src="#{post.attachedFileURL(file)}")
+                            - var formAction = url('posts.delete')
+                            form(action="#{formAction}", method="POST")
+                              input(type="hidden", name='postID', value='#{post._id}')
+                              input(type="hidden", name='fileIndex', value='#{index}')
+                              | #{index}: 
+                              a(href='#{post.attachedFileURL(index)}') #{name}
+                              | &nbsp;
+                              input(type="submit", class="button radius small", value="delete file")
+                  if (post.images.length > 0)
+                    section
+                      h1 Attached Images
+                      each image, index in post.images
+                        //- Some indexes may be left null from previously
+                        //- deleted files.
+                        if image
+                        .row
+                          .two.columns
+                            a(href='#{post.attachedImageURL(index)}')
+                              img(src="#{post.attachedImageURL(image, 'thumbnail')}")
+                            - var formAction = url('posts.delete')
+                          form(action="#{formAction}", method="POST").ten.columns
+                            input(type="hidden", name='postID', value='#{post._id}')
+                            input(type="hidden", name='imageIndex', value='#{index}')
+                            | #{index}: #{image.name} 
+                            input(type="submit", class="button radius small right", value="delete image")
+
+      aside.four.columns
+        h1 Add Some Test Posts
+        p .
+          Use this form to add file posts for testing. These posts have
+          formatted text fields, file attachments, image file attachments and
+          dedicated file and image fields.

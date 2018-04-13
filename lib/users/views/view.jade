@@ -1,0 +1,18 @@
+extend layout
+
+block main
+  ul
+    li username: #{user.username}
+    li full name: #{user.fullName}
+    if user.administrator
+      li administrator: Yes
+    else
+      li administrator: No
+  section
+    h1 Roles
+    if !(user.roles.length)
+      p No roles assigned.
+    else
+      ul
+        each role, roleName in user.roles
+          li #{role.name}

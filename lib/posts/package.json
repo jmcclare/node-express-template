@@ -1,0 +1,13 @@
+{
+  "name": "contact",
+  "description": "Provides a contact page with a form that sends email to whatever addresses you specify on the back-end.",
+  "author": "Jonathan McClare",
+  "version": "1.0.0",
+  "main": "./index.coffee",
+  "private": true,
+  "dependencies": {
+    "nodemailer": "0.3.44",
+    "mongoose-attachments-localfs": "0.1.0",
+    "debug":    "2.1.3"
+  }
+}

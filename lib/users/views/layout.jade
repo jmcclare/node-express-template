@@ -1,0 +1,22 @@
+extend ../layout
+
+block body
+  main
+    header.outer.row#main-heading
+      div.twelve.columns
+        div.panel
+          h1 #{title}
+          if subTitle
+            strong.subheading #{subTitle}
+        hr
+
+    div.row.container
+      div.eight.columns
+        block main
+
+      aside.four.columns
+        block aside 
+          h1 Related Info
+          p .
+            We would place related info and links here, if we had any. For now, go
+            back to the <a href="/">home page</a>.

@@ -1,0 +1,5 @@
+// Augments the alpha
+opacify($color, al)
+  rgba(red($color), green($color), blue($color), min(1, alpha($color) + al))
+transparentize($color, al)
+  rgba(red($color), green($color), blue($color), max(0, alpha($color) - al))

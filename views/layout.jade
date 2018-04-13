@@ -1,0 +1,186 @@
+!!! 5
+- if (ngApp) { ngAppProp = "ng-app='" + ngApp + "' "; }
+- else { ngAppProp = ''; }
+//if lt IE 7
+  | <html class='no-js lt-ie9 lt-ie8 lt-ie7' lang='en'>
+//if IE 7
+  | <html class='no-js lt-ie9 lt-ie8' lang='en'>
+//if IE 8
+  | <html #{ngAppProp}class='no-js lt-ie9' lang='en'>
+//[if gt IE 8]><!
+| <html #{ngAppProp}class='no-js' lang='en'>
+//<![endif]
+head
+  meta(charset="utf-8")
+  meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+
+  - var titleAddition = (section === 'site-root' ? '' : ' - Node Express')
+  title #{title}#{titleAddition}
+  meta(name='description', content='#{description}')
+  meta(name='author', content='#{author}')
+
+  meta(name='viewport', content='width=device-width')
+
+  link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700',  type='text/css')
+  //-link(rel='stylesheet', href='/_css/style.css')
+  != css('/_css/style')
+
+  //-Icon font Font Awesome: http://fontawesome.io/
+  link(rel='stylesheet', href='/_css/font-awesome-4.3.0/css/font-awesome.min.css',  type='text/css')
+
+  script(src='/_js/libs/modernizr-2.6.2.min.js')
+
+  - if (baseURL) {
+  base(href='#{baseURL}')
+  - }
+body
+  //if lt IE 8
+    p.chromeframe.
+      Your browser is <em>ancient!</em>
+      <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+      <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
+      to experience this site.
+  div.contain-to-grid
+    nav.top-bar.contain-to-grid
+      ul
+        - var klass = (section === 'site-root' ? "active" : "")
+        li.name(class=klass)
+          div 
+            a(href="/") Express With Nibble
+        li.toggle-topbar
+          a(href="#") 
+
+      section
+        ul.left
+          li.divider
+          - var klass = (section === 'users' ? "active" : "")
+          li(class='#{klass} has-dropdown')
+            - var usersUrl = url('users.index')
+            a(href='#{usersUrl}') Users
+            ul.dropdown
+              li
+                a(href='#{usersUrl}') Users
+              li
+                label Section Name
+              li.has-dropdown
+                a(href='#') Level 2, Has Dropdown
+                ul.dropdown
+                  li
+                    a(href='#') Level 3 Option
+                  li
+                    a(href='#') Level 3 Option
+                  li.has-dropdown
+                    a(href='#') Level 3 Dropdown
+                    ul.dropdown
+                      li
+                        label Section Name
+                      li
+                        a(href='#') Level 4 Option
+                      li
+                        a(href='#') Level 4 Option
+                      li
+                        a(href='#') Level 4 Option
+                      li
+                        a(href='#') Level 4 Option
+                  li
+                    a(href='#') Level 3 Option
+                  li
+                    a(href='#') Level 3 Option
+              li
+                a(href='#') Level 2 Option
+              li.divider
+              li
+                label Section Name
+              li
+                - var usersUrl = url('users.index')
+                a(href='#{usersUrl}') Users Again
+              li
+                a(href='#') Level 2 Option
+              li
+                a(href='#') Level 2 Option
+          - var klass = (section === 'articles' ? "active" : "")
+          li(class='#{klass}')
+            - var articlesUrl = url('articles.index')
+            a(href="#{articlesUrl}") Articles
+          - var klass = (section === 'contact' ? "active" : "")
+          li(class='#{klass}')
+            - var contactUrl = url('contact')
+            a(href="#{contactUrl}") Contact
+          li.divider
+        ul.right
+          li.divider
+          - if (req.user) {
+          li
+            a(href="/users/#{req.user.username}/") Hello #{req.user.username}
+          li
+            - var logoutUrl = url('logout')
+            a(href="#{logoutUrl}") Logout
+          - } else {
+          li
+            - var loginUrl = url('login')
+            a(href="#{loginUrl}") Login
+          - }
+
+  block flash
+    - var infoFlash = req.flash('info').pop();
+    - var errorFlash = req.flash('error').pop();
+
+    - if (infoFlash || errorFlash) {
+    div.outer.row#flash
+
+      - if (infoFlash) {
+      .twelve.columns
+        .alert-box
+          != infoFlash
+          a.close(href='') ×
+      - }
+
+      - if (errorFlash) {
+      .twelve.columns
+        .alert-box.alert
+          != errorFlash
+          a.close(href='') ×
+      - }
+    - }
+
+  block body
+
+  footer
+    section.container.row.social-media
+    section.container.row.social-media
+      h1 Follow Us
+      p.icons
+        a(href='#', title='Node Express on Facebook')
+          span.fa.fa-facebook-official
+        |   
+        a(href='#', title='Node Express on YouTube')
+          span.fa.fa-youtube-square
+        |   
+        a(href='#', title='Node Express on Twitter')
+          span.fa.fa-twitter-square
+        |   
+        a(href='#', title='Node Express on Instagram')
+          span.fa.fa-instagram
+        |   
+        a(href='#', title='Node Express on tumblr')
+          span.fa.fa-tumblr-square
+    section.container.row.copyright
+      p &copy; Company 2012
+
+  //if lt IE 8
+    script(src='//bestiejs.github.io/json3/lib/json3.js')
+
+  //-All JavaScript but Modernizer is included by this one using connect-assets
+  //-(Snockets).
+  != js('/_js/include')
+
+  //- NOTE: If you have any problems with this elegant HTML5 Boilerplate
+  //- version of the tracking code, try an exact copy of the code supplied by the
+  //- Google Analytics admin interface. We found the elegant version was not
+  //- working for us at sakuramai.ca.
+  script
+    var _gaq=[['_setAccount','#{gaAccount}'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+| </html>

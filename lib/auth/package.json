@@ -1,0 +1,11 @@
+{
+  "name": "auth",
+  "description": "Provides user login and session management.",
+  "author": "Jonathan McClare",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "passport": "0.1.17",
+    "passport-local": "0.1.6"
+  }
+}

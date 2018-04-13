@@ -1,0 +1,43 @@
+extend ../layout
+
+block body
+  main
+    header.outer.row#main-heading
+      .twelve.columns
+        .panel
+          h1 #{title}
+          if subTitle
+            h2 #{subTitle}
+        hr
+
+    .outer.row
+      .eight.columns
+        - loginAction = url('login')
+        form(action="#{loginAction}", method="POST")
+          fieldset
+            .row
+              .eight.columns
+                //-- if (fieldErrors['username']) {
+                //-label(for="username", class="error") User Name
+                //-input(type="text", name="username", value="#{username}", class="error")
+                //-small.error #{fieldErrors['username']}
+                //-- } else {
+                //-label(for="username") Name
+                //-input(type="text", name="username", value="#{username}")
+                //-- }
+                label(for="username") Username
+                input(type="text", name="username", tabindex="1")
+            .row
+              .eight.columns
+                //-- if (fieldErrors['password']) {
+                //-label(for="password", class="error") Password
+                //-input(type="text", name="password", value="#{password}", class="error")
+                //-small.error #{fieldErrors['password']}
+                //-- } else {
+                //-label(for="password") Name
+                //-input(type="text", name="password", value="#{password}")
+                //-- }
+                label(for="password") Password
+                input(type="password", name="password", tabindex="2")
+          p
+            input(type="submit", class="button radius", value="Login", tabindex="3")

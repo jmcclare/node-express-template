@@ -1,0 +1,20 @@
+extend ../partials/layout
+
+block messages
+  .outer.row(ng-show="errorAlert")
+    .twelve.columns
+      .alert-box.alert
+        | {{errorAlert}}
+        a.close(href='') ×
+
+block content
+  form
+    fieldset
+      p
+        | Are you sure you want to delete the article 
+        q {{article.title}}
+        | ?
+    p
+      button(class="button secondary radius", tabindex="4", ng-click='cancel()') Cancel
+      | &nbsp;
+      button(class="button radius", tabindex="5", ng-click='deleteArticle()') Delete

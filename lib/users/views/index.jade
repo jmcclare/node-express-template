@@ -1,0 +1,18 @@
+extend layout
+
+block main
+  p .
+    This page displays a list of sample user objects.
+  section
+    h1 User List
+    dl
+      each user, username in users
+        - var userUrl = url('users.view', { username: user.username })
+        dt
+          a(href='#{userUrl}') #{user.fullName}
+        dd
+          | username: #{user.username}<br />
+          if user.administrator
+            | administrator: Yes
+          else
+            | administrator: No

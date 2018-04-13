@@ -1,0 +1,40 @@
+extend layout
+//-TODO: Find out if this template is used anywhere. If not, remove it.
+
+block messages
+  .outer.row(ng-show="errorAlert")
+    .twelve.columns
+      .alert-box.alert
+        | {{errorAlert}}
+        a.close(href='') ×
+
+block content
+  //-form(action="#{formAction}", method="POST")
+  form
+    fieldset
+      .row
+        .eight.columns
+          label(for="title") Title
+          input(type="text", name="title", ng-model="form.title")
+          small.error(ng-show='inputErrors') {{fieldErrors.title}}
+      .row
+        .eight.columns
+          label(for="slug") slug
+          input(type="text", name="slug", ng-model="form.slug")
+      .row
+        .eight.columns
+          label(for="body") Body
+          textarea(name='body', rows='8', ng-model="form.body")
+          small.error(ng-show='inputErrors') {{fieldErrors.body}}
+      .row
+        .eight.columns
+          label(for="published")
+            //-- if (fieldValues['published'])
+              //-- var checked = ' checked'
+            //-| <input type="checkbox" name="published" id="published"#{checked} />
+            | <input type="checkbox" name="published" id="published" ng-model="form.published" />
+            | Published
+    p
+      button(class="button secondary radius", tabindex="4", ng-click='cancel()') Cancel
+      | &nbsp;
+      button(class="button radius", tabindex="5", ng-click='submitArticle()') Submit

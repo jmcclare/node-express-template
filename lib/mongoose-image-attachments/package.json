@@ -1,0 +1,30 @@
+{
+  "name": "mongoose-image-attachments",
+  "description": "Mongoose.js plugin for attaching an array of image files to a model instance.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan McClare",
+    "url": "http://jmcclare.com"
+  },
+  "keywords": [
+    "mongoose",
+    "mongodb",
+    "upload",
+    "attachment",
+    "file",
+    "image"
+  ],
+  "homepage": "https://github.com/jmcclare/web-templates/tree/master/node-express/lib/mongoose-image-attachments",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcclare/web-templates"
+  },
+  "main": "index.coffee",
+  "dependencies": {
+    "async":  "0.2.10"
+  },
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": ">=0.10.25"
+  }
+}

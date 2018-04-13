@@ -1,0 +1,11 @@
+//-Block for the aside element that lists unpublished articles.
+section
+  h1 Unpublished Articles
+  ul
+    each a in unpubArticles
+      - var articleUrl = url('articles.view', { slug: a.slug })
+      li
+        a(href='#{articleUrl}') #{a.title}
+        - if (a.pubTime) {
+        em  - scheduled
+        - }

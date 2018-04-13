@@ -1,0 +1,55 @@
+extend ../partials/layout
+
+block messages
+  .outer.row(ng-show="errorAlert")
+    .twelve.columns
+      .alert-box.alert
+        | {{errorAlert}}
+        a.close(href='') ×
+
+block content
+  form
+    fieldset
+      .row
+        .eight.columns
+          label(for="title") Title
+          input(type="text", name="title", ng-model="form.title")
+          small.error(ng-show='fieldErrors.title') {{fieldErrors.title}}
+      .row
+        .twelve.columns
+          label(for="description") Description
+          input(type="text", name="description", ng-model="form.description")
+          small.error(ng-show='fieldErrors.description') {{fieldErrors.description}}
+      .row
+        .twelve.columns
+          label(for="summary") Summary
+          textarea(name='summary', rows='8', ng-model="form.summary")
+          small.error(ng-show='fieldErrors.summary') {{fieldErrors.summary}}
+      .row
+        .twelve.columns
+          label(for="body") Body
+          textarea(name='body', rows='16', ng-model="form.body")
+          small.error(ng-show='fieldErrors.body') {{fieldErrors.body}}
+      .row
+        .eight.columns
+          label(for="bodyFormat").inline.right Body Format
+        .four.columns
+          select(
+            ng-model='form.bodyFormat',
+            name='bodyFormat',
+            ng-options='format for format in bodyFormatOptions')
+        .four.columns
+          | &nbsp;
+      .row.collapse
+        .eight.columns
+          label(for="pubTime") Publication Time
+        .six.columns
+          input(type="text", name="pubTime", id="pubTime")
+        .two.columns
+          button(class="button secondary radius small expand postfix", tabindex="3", ng-click='clearDTP()') Clear
+        .eight.columns
+          small.error(ng-show='fieldErrors.pubTime') {{fieldErrors.pubTime}}
+    p
+      button(class="button secondary radius", tabindex="4", ng-click='cancel()') Cancel
+      | &nbsp;
+      button(class="button radius", tabindex="5", ng-click='submitArticle()') Submit

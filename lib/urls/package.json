@@ -1,0 +1,7 @@
+{
+  "name": "urls",
+  "description": "Provides a url helper function much like Django's. It takes a URL name and any required parameters and returns the URL.",
+  "author": "Jonathan McClare",
+  "version": "0.0.1",
+  "private": true
+}

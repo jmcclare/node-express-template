@@ -1,0 +1,11 @@
+{
+  "name": "users",
+  "description": "Provides site users and authentication (login).",
+  "author": "Jonathan McClare",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "mongoose":   "*",
+    "urls": "*"
+  }
+}

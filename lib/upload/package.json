@@ -1,0 +1,35 @@
+{
+  "name": "upload",
+  "description": "Middleware for dealing with file uploads. Uses Multer.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jonathan McClare",
+    "url": "http://jmcclare.com"
+  },
+  "homepage": "https://github.com/jmcclare/web-templates/tree/master/node-express/lib/upload",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcclare/web-templates"
+  },
+  "keywords": [
+    "request",
+    "post",
+    "file",
+    "files",
+    "upload",
+    "uploads"
+  ],
+  "main": "index.coffee",
+  "dependencies": {
+    "fs.extra": "1.2.1",
+    "mkdirp": "0.3.5",
+    "async": "0.9.0"
+  },
+  "devDependencies": {
+    "mocha": "1.18.0"
+  },
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": ">=0.10.25"
+  }
+}

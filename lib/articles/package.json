@@ -1,0 +1,19 @@
+{
+  "name": "articles",
+  "description": "Provides editable articles.",
+  "author": "Jonathan McClare",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "moment":     "2.2.1",
+    "marked":     "0.2.9",
+    "uslug":      "1.0.x"
+  },
+  "projectDependencies": {
+    "mongoose":   "*"
+  },
+  "localDependencies": {
+    "urls":     "*",
+    "errors":   "*"
+  }
+}

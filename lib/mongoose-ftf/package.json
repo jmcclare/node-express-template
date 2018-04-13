@@ -1,0 +1,34 @@
+{
+  "author": {
+    "name": "Jonathan McClare",
+    "url": "http://jmcclare.com"
+  },
+  "name": "mongoose-ftf",
+  "description": "Mongoose.js formatted text field plugin for text fields formatted in Markdown, Jade or plain text.",
+  "keywords": [
+    "mongodb",
+    "mongoose",
+    "plugin",
+    "formatted",
+    "field",
+    "text",
+    "markdown",
+    "jade"
+  ],
+  "version": "1.1.0",
+  "homepage": "https://github.com/jmcclare/web-templates/tree/master/node-express/lib/mongoose-ftf",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcclare/web-templates"
+  },
+  "main": "index.coffee",
+  "dependencies": {
+    "marked":     "0.3.1",
+    "async":  "0.2.10"
+  },
+  "projectDependencies": {
+    "mongoose":   "*",
+    "jade":       "*"
+  },
+  "readmeFilename": "README.md"
+}
