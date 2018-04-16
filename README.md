@@ -4,8 +4,8 @@ A template for a [Node.js](http://nodejs.org/) [Express](http://expressjs.com/)
 site.
 
 _Note_: This project is no longer maintained. See my [Koa.js site
-template](https://github.com/jmcclare/koa-template) for an up to date app
-boilerplate with lots of useful features already working.
+template](https://github.com/jmcclare/koa-template) for a newer app boilerplate
+with lots of useful features already working.
 
 We add:
 
