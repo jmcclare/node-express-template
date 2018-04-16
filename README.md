@@ -3,6 +3,10 @@
 A template for a [Node.js](http://nodejs.org/) [Express](http://expressjs.com/)
 site.
 
+_Note_: This project is no longer maintained. See my [Koa.js site
+template](https://github.com/jmcclare/koa-template) for an up to date app
+boilerplate with lots of useful features already working.
+
 We add:
 
 * markup and JavaScript from [HTML5 Boilerplate](http://html5boilerplate.com/)
